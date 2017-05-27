@@ -1,2 +1,2 @@
-+# ardutan
- +arduboy用ゲーム
+# ardutan
+arduboy用ゲーム
