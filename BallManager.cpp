@@ -159,9 +159,11 @@ void BallManager::isHit(Block* block)
       right_hit_flag = true;
     }
 
-    float abs_x = abs(ball->getX() - block->getX());
-    float abs_y = abs(ball->getY() - block->getY());
+    float abs_x = 0;
+    float abs_y = 0;
     if (ball->getDY() > 0 && ball->getDX() > 0) {
+      abs_x = abs(ball->getX() - block->getLeft());
+      abs_y = abs(ball->getY() - block->getTop());
       // ➘右下
       // 左上にヒット
       if (top_hit_flag && left_hit_flag) {
@@ -169,11 +171,11 @@ void BallManager::isHit(Block* block)
         if (abs_x < abs_y) {
           // Xのが近い
           ball->setX(block->getLeft() - GameManager::BALL_HALF_WIDTH);
-          ball->riversDY();
+          ball->riversDX();
         } else if (abs_x > abs_y) {
           // Yのが近い
           ball->setY(block->getTop() - GameManager::BALL_HALF_HEIGHT);
-          ball->riversDX();
+          ball->riversDY();
         } else {
           // 一緒
           ball->setX(block->getLeft() - GameManager::BALL_HALF_WIDTH);
@@ -183,6 +185,8 @@ void BallManager::isHit(Block* block)
         }
       }
     } else  if (ball->getDY() > 0 && ball->getDX() < 0) {
+      abs_x = abs(ball->getX() - block->getRight());
+      abs_y = abs(ball->getY() - block->getTop());
       // ↙左下
       // 右上にヒット
       if (top_hit_flag && right_hit_flag) {
@@ -190,11 +194,11 @@ void BallManager::isHit(Block* block)
         if (abs_x < abs_y) {
           // Xのが近い
           ball->setX(block->getRight() + GameManager::BALL_HALF_WIDTH);
-          ball->riversDY();
+          ball->riversDX();
         } else if (abs_x > abs_y) {
           // Yのが近い
           ball->setY(block->getTop() - GameManager::BALL_HALF_HEIGHT);
-          ball->riversDX();
+          ball->riversDY();
         } else {
           // 一緒
           ball->setY(block->getTop() - GameManager::BALL_HALF_HEIGHT);
@@ -204,6 +208,8 @@ void BallManager::isHit(Block* block)
         }
       }
     } else if (ball->getDY() < 0 && ball->getDX() > 0) {
+      abs_x = abs(ball->getX() - block->getLeft());
+      abs_y = abs(ball->getY() - block->getDown());
       // ➚右上
       // 左下にヒット
       if (down_hit_flag && left_hit_flag) {
@@ -211,11 +217,11 @@ void BallManager::isHit(Block* block)
         if (abs_x < abs_y) {
           // Xのが近い
           ball->setX(block->getLeft() - GameManager::BALL_HALF_WIDTH);
-          ball->riversDY();
+          ball->riversDX();
         } else if (abs_x > abs_y) {
           // Yのが近い
           ball->setY(block->getDown() + GameManager::BALL_HALF_HEIGHT);
-          ball->riversDX();
+          ball->riversDY();
         } else {
           // 一緒
           ball->setY(block->getDown() + GameManager::BALL_HALF_HEIGHT);
@@ -225,6 +231,8 @@ void BallManager::isHit(Block* block)
         }
       }
     } else if (ball->getDY() < 0 && ball->getDX() < 0) {
+      abs_x = abs(ball->getX() - block->getRight());
+      abs_y = abs(ball->getY() - block->getDown());
       // ↖左上
       // 右下にヒット
       if (down_hit_flag && right_hit_flag) {
@@ -232,11 +240,11 @@ void BallManager::isHit(Block* block)
         if (abs_x < abs_y) {
           // Xのが近い
           ball->setX(block->getRight() + GameManager::BALL_HALF_WIDTH);
-          ball->riversDY();
+          ball->riversDX();
         } else if (abs_x > abs_y) {
           // Yのが近い
           ball->setY(block->getDown() + GameManager::BALL_HALF_HEIGHT);
-          ball->riversDX();
+          ball->riversDY();
         } else {
           // 一緒
           ball->setX(block->getRight() + GameManager::BALL_HALF_WIDTH);
